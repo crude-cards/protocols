@@ -58,7 +58,8 @@
 ```js
 {
   "id": 0,
-  "name": "Custom Deck"
+  "owner": 0, // owner ID
+  "name": "Custom Deck",
   "cards": [] // an array of Card objects
 }
 ```
@@ -85,7 +86,6 @@
 - Decks
   - `GET /api/decks` (search)
   - `🔒 POST /api/decks`
-  - `🔒 PATCH /api/decks`
   - `GET /api/decks/:id`
   - `🔒 DELETE /api/decks/:id`
 
@@ -423,5 +423,75 @@ Posts a message to this channel.
 ```js
 {
   "message": "Channel does not exist."
+}
+```
+
+-----
+## Decks
+### `GET /api/decks`
+TO DO.
+
+### `🔒 POST /api/decks`
+Create a new deck.
+
+#### Parameters
+- `name` - string, up to 32 characters.
+- `cards` - array of objects containing the following properties (the server should generate the ID of the cards by itself.)
+  - `type` - number, 0 = black (call), 1 = white (response)
+  - `content` - string, up to 180 characters.
+
+#### Response (200)
+```js
+{
+  "deck": {} // deck object
+}
+```
+
+#### Response (400, invalid data)
+```js
+{
+  "message": "Invalid data."
+}
+```
+
+#### Response (500, not accepting new decks for whatever reason)
+```js
+{
+  "message": "Could not create deck at this time."
+}
+```
+
+### `GET /api/decks/:id`
+#### Response (200)
+```js
+{
+  "deck": {} // deck object
+}
+```
+
+#### Response (404, deck does not exist)
+```js
+{
+  "message": "Deck does not exist."
+}
+```
+
+### `🔒 DELETE /api/decks/:id`
+#### Response (201)
+```js
+// deck deleted
+```
+
+#### Response (401, user is not creator of deck)
+```js
+{
+  "message": "You are not the owner of this deck."
+}
+```
+
+#### Response (404, deck does not exist)
+```js
+{
+  "message": "Deck does not exist."
 }
 ```
