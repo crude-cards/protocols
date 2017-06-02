@@ -34,6 +34,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 - `X-RateLimit-Reset` - The remaining window before the rate limit resets (in UTC epoch seconds.)
 - `Retry-After` - Time remaining (milliseconds) until the current window resets (used to minify time offsets.)
 
+#### Response (429)
 ```js
 {
   "code": 429,
