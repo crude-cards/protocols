@@ -1,8 +1,51 @@
 # Crude Cards - Protocol v1.0.0 _(Draft)_
 
-1. Responses must be JSON
+1. Responses must be JSON.
 2. 🔒 indicates that an endpoint requires a valid `authorization` header. If this header is invalid or not present, the server should respond with the code 401.
-3. `?` indicates that a parameter is optional
+3. `?` indicates that a parameter is optional.
+4. All rate limits provided in this specification are _suggested_ - you can change them if you wish.
+
+-----
+## Default Responses
+### 401 - Authorization not valid
+For endpoints that require authorization and invalid authorization is given:
+```js
+{
+  "code": 401,
+  "message": "Authorization required."
+}
+```
+
+### 404 - Resource not found
+If applicable, use an endpoint's specific 404 response, otherwise respond with the following JSON and error code 404:
+```js
+{
+  "code": 404,
+  "message": "Resource not found."
+}
+```
+
+### 429 - Rate-limiting
+To rate-limit an endpoint, make sure the following headers are present:
+
+#### Headers
+- `X-RateLimit-Limit` - number of requests allowed in the current window.
+- `X-RateLimit-Remaining` - number of requests remaining in the current window.
+- `X-RateLimit-Reset` - The remaining window before the rate limit resets (in UTC epoch seconds.)
+- `Retry-After` - Time remaining (milliseconds) until the current window resets (used to minify time offsets.)
+
+```js
+{
+  "code": 429,
+  "message": "You are being rate-limited.",
+  "meta": { // the meta field is optional, but if provided it MUST contain these properties.
+    "limit": 0,
+    "remaining": 0,
+    "reset": 0,
+    "retryAfter": 10
+  }
+}
+```
 
 -----
 ## Structures
