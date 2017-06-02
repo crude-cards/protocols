@@ -82,8 +82,6 @@
 - Messaging
   - `🔒 GET /api/messages/:channel`
   - `🔒 POST /api/messages/:channel`
-  - `🔒 GET /api/messages/:channel/:id`
-  - `🔒 DELETE /api/messages/:channel/:id`
 - Decks
   - `GET /api/decks` (search)
   - `🔒 POST /api/decks`
@@ -365,5 +363,65 @@ If the czar calls this, it specifies the winning player. All other players call 
 ```js
 {
   "message": "Some of those cards were not found."
+}
+```
+
+-----
+## Messaging
+### `🔒 GET /api/messages/:channel`
+Responds with the last 50 messages sent in this channel. Channel can either be -1 (global chat) or a game ID.
+
+#### Response (200)
+```js
+{
+  "messages": [] // array of up to 50 messages
+}
+```
+
+#### Response (404, channel does not exist)
+```js
+{
+  "message": "Channel does not exist."
+}
+```
+
+#### Response (403, user does not have access to channel)
+```js
+{
+  "message": "You do not have access to this channel."
+}
+```
+
+### `🔒 POST /api/messages/:channel`
+Posts a message to this channel.
+
+#### Parameters
+- `content` - string, up to 1,000 characters - make sure to sanitise!
+
+#### Response (200)
+```js
+{
+  "message": {} // Message object
+}
+```
+
+#### Response (400, invalid content)
+```js
+{
+  "message": "Invalid content (too long?)"
+}
+```
+
+#### Response (403, player doesn't have access to this channel)
+```js
+{
+  "message": "You do not have access to this channel."
+}
+```
+
+#### Response (404, channel does not exist)
+```js
+{
+  "message": "Channel does not exist."
 }
 ```
