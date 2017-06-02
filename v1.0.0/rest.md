@@ -118,13 +118,13 @@ To rate-limit an endpoint, make sure the following headers are present:
 - Users
   - `🔒 GET /api/users/:id`
 - Games
-  - `🔒 GET /games`
-  - `🔒 POST /games`
-  - `(🔒) GET /games/:id` (🔒 if game is private)
-  - `🔒 PATCH /games/:id`
-  - `🔒 DELETE /games/:id`
-  - `🔒 POST /games/:id`
-  - `🔒 POST /games/:id/select`
+  - `🔒 GET /api/games`
+  - `🔒 POST /api/games`
+  - `(🔒) GET /api/games/:id` (🔒 if game is private)
+  - `🔒 PATCH /api/games/:id`
+  - `🔒 DELETE /api/games/:id`
+  - `🔒 POST /api/games/:id`
+  - `🔒 POST /api/games/:id/select`
 - Messaging
   - `🔒 GET /api/messages/:channel`
   - `🔒 POST /api/messages/:channel`
@@ -203,7 +203,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 }
 ```
 
-### `🔒 POST /games`
+### `🔒 POST /api/games`
 #### Rate-limiting
 - 1/30 token
 #### Parameters
@@ -245,7 +245,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 }
 ```
 
-### `(🔒) GET /games/:id`
+### `(🔒) GET /api/games/:id`
 The endpoint should _only_ require authentication if the game is private. In this case, the endpoint should only continue the request if the authenticated user is in the game.
 #### Rate-limiting
 - 20/60
@@ -264,14 +264,14 @@ The endpoint should _only_ require authentication if the game is private. In thi
 }
 ```
 
-### `🔒 PATCH /games/:id`
+### `🔒 PATCH /api/games/:id`
 #### Rate-limiting
 - 1/10 token
 
 Only the owner of a game is allowed to call this endpoint.
 
 #### Parameters
-- Same parameters provided to `🔒 POST /games`
+- Same parameters provided to `🔒 POST /api/games`
 - `?owner` - integer, user ID of new owner (must be a player, otherwise 400)
 
 #### Response (200)
@@ -302,7 +302,7 @@ Only the owner of a game is allowed to call this endpoint.
 }
 ```
 
-### `🔒 DELETE /games/:id`
+### `🔒 DELETE /api/games/:id`
 #### Rate-limiting
 - 1/10 token
 
@@ -344,7 +344,7 @@ Deletes/leaves the current game. The owner can end the game by calling this endp
 }
 ```
 
-### `🔒 POST /games/:id`
+### `🔒 POST /api/games/:id`
 #### Rate-limiting
 - 3/10 token
 
@@ -374,7 +374,7 @@ Joins the specified game.
 }
 ```
 
-### `🔒 POST /games/:id/select`
+### `🔒 POST /api/games/:id/select`
 If the czar calls this, it specifies the winning player. All other players call this to put forward their choice of cards. The round should be ended immediately after the czar picks the winner.
 
 #### Rate-limiting
