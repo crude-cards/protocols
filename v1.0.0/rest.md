@@ -7,7 +7,7 @@
 
 -----
 ## Default Responses
-### 401 - Authorization not valid
+### 401 - Invalid Authorization
 For endpoints that require authorization and invalid authorization is given:
 ```js
 {
@@ -16,7 +16,7 @@ For endpoints that require authorization and invalid authorization is given:
 }
 ```
 
-### 404 - Resource not found
+### 404 - Resource Not Found
 If applicable, use an endpoint's specific 404 response, otherwise respond with the following JSON and error code 404:
 ```js
 {
