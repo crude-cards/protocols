@@ -3,7 +3,8 @@
 1. Responses must be JSON.
 2. 🔒 indicates that an endpoint requires a valid `authorization` header. If this header is invalid or not present, the server should respond with the code 401.
 3. `?` indicates that a parameter is optional.
-4. All rate limits provided in this specification are _suggested_ - you can change them if you wish.
+4. All rate-limits provided in this specification are _suggested_ - you can change them if you wish.
+5. Provided rate-limits are in the format `limit/time - mode`, where `time` is the time in seconds, e.g. 5/60 means 5 requests per minute. If `mode` is `token`, then the rate-limits should be applied by the `authorization` header and not the IP address.
 
 -----
 ## Default Responses
@@ -136,6 +137,8 @@ To rate-limit an endpoint, make sure the following headers are present:
 -----
 ## Meta and Authentication
 ### `GET /api/meta`
+#### Rate-limiting
+- 5/60
 #### Response (200)
 ```js
 {
@@ -148,6 +151,8 @@ To rate-limit an endpoint, make sure the following headers are present:
 ```
 
 ### `POST /api/authenticate`
+#### Rate-limiting
+- 5/60
 #### Parameters
 - `?username` - string, alphanumeric, up to 20 characters. Server should generate a random username if one is not present.
 #### Response (200)
@@ -164,6 +169,8 @@ To rate-limit an endpoint, make sure the following headers are present:
 -----
 ## Users
 ### `🔒 GET /api/users/:id`
+#### Rate-limiting
+- 10/10
 #### Response (200)
 ```js
 {
@@ -184,6 +191,8 @@ To rate-limit an endpoint, make sure the following headers are present:
 -----
 ## Games
 ### `🔒 GET /api/games`
+#### Rate-limiting
+- 5/10 token
 #### Parameters
 - `?joinable` - boolean, defaults to false. If true, only games that can be joined (i.e. not full) are displayed
 
@@ -195,6 +204,8 @@ To rate-limit an endpoint, make sure the following headers are present:
 ```
 
 ### `🔒 POST /games`
+#### Rate-limiting
+- 1/30 token
 #### Parameters
 - `name` - string, up to 32 characters.
 - `?password` - if present, game is private.
@@ -236,6 +247,8 @@ To rate-limit an endpoint, make sure the following headers are present:
 
 ### `(🔒) GET /games/:id`
 The endpoint should _only_ require authentication if the game is private. In this case, the endpoint should only continue the request if the authenticated user is in the game.
+#### Rate-limiting
+- 20/60
 
 #### Response (200)
 ```js
@@ -252,6 +265,8 @@ The endpoint should _only_ require authentication if the game is private. In thi
 ```
 
 ### `🔒 PATCH /games/:id`
+#### Rate-limiting
+- 1/10 token
 
 Only the owner of a game is allowed to call this endpoint.
 
@@ -288,6 +303,9 @@ Only the owner of a game is allowed to call this endpoint.
 ```
 
 ### `🔒 DELETE /games/:id`
+#### Rate-limiting
+- 1/10 token
+
 Deletes/leaves the current game. The owner can end the game by calling this endpoint with no parameters, or can leave and pass on ownership using the `owner` parameter (see below.)
 
 #### Parameters
@@ -327,6 +345,9 @@ Deletes/leaves the current game. The owner can end the game by calling this endp
 ```
 
 ### `🔒 POST /games/:id`
+#### Rate-limiting
+- 3/10 token
+
 Joins the specified game.
 
 #### Parameters
@@ -355,6 +376,9 @@ Joins the specified game.
 
 ### `🔒 POST /games/:id/select`
 If the czar calls this, it specifies the winning player. All other players call this to put forward their choice of cards. The round should be ended immediately after the czar picks the winner.
+
+#### Rate-limiting
+- 1/10 token
 
 #### Parameters (czar only)
 - `player` - integer, ID of winning player
@@ -415,6 +439,9 @@ If the czar calls this, it specifies the winning player. All other players call 
 ### `🔒 GET /api/messages/:channel`
 Responds with the last 50 messages sent in this channel. Channel can either be -1 (global chat) or a game ID.
 
+#### Rate-limiting
+- 1/10 token, different for each channel
+
 #### Response (200)
 ```js
 {
@@ -438,6 +465,9 @@ Responds with the last 50 messages sent in this channel. Channel can either be -
 
 ### `🔒 POST /api/messages/:channel`
 Posts a message to this channel.
+
+#### Rate-limiting
+- 10/10 token, different for each channel.
 
 #### Parameters
 - `content` - string, up to 1,000 characters - make sure to sanitise!
@@ -478,6 +508,9 @@ TO DO.
 ### `🔒 POST /api/decks`
 Create a new deck.
 
+#### Rate-limiting
+- 1/30 token
+
 #### Parameters
 - `name` - string, up to 32 characters.
 - `cards` - array of objects containing the following properties (the server should generate the ID of the cards by itself.)
@@ -506,6 +539,10 @@ Create a new deck.
 ```
 
 ### `GET /api/decks/:id`
+
+#### Rate-limiting
+- 60/60 token
+
 #### Response (200)
 ```js
 {
@@ -521,6 +558,10 @@ Create a new deck.
 ```
 
 ### `🔒 DELETE /api/decks/:id`
+
+#### Rate-limiting
+- 1/10 token
+
 #### Response (201)
 ```js
 // deck deleted
