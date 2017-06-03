@@ -32,7 +32,7 @@
 4. `GAME_UPDATE`
     - Sent by server.
     - Only sent if there are changes to the configuration of a game, not if there is a new round or winner.
-5. `GAME_PLAYERS_UPDATE`:
+5. `GAME_PLAYERS_UPDATE`
     - Sent by server when a player joins/leaves a game.
 6. `GAME_DELETE`
     -	Sent by server once a game has been deleted or ended.
@@ -52,12 +52,96 @@
 ## Meta Packets
 ### `IDENTIFY`
 - Sent by client.
+- If the token is invalid, the server should disconnect the client from the gateway with code 1000.
 #### Example
 ```js
 {
   "t": 0,
   "d": {
     "token": "abc123"
+  }
+}
+```
+
+### `HEARTBEAT`
+- Sent by client
+- Gateway should set a reasonable heartbeat period (e.g. 60 seconds), if heartbeats are not received within this period, the client should be disconnected with code 1000.
+#### Example
+```js
+{
+  "t": 1
+}
+```
+
+### `READY`
+- Sent by server once the client has been successfully authenticated.
+#### Example
+```js
+{
+  "t": 2,
+  "d": {
+    "heartbeat": 60000,
+    "user": {} // User object
+  }
+}
+```
+
+### `GAME_CREATE`
+- Sent by server.
+- Once a client authenticates, they should be sent ~20 games.
+- Also sent if a new public game has been created.
+#### Example
+```js
+{
+  "t": 3,
+  "d": {
+    "game": {} // Game object
+  }
+}
+```
+
+### `GAME_UPDATE`
+- Sent by server.
+- Only sent if any properties of the normal Game object change, except `players` or `spectators` - they use `GAME_PLAYERS_UPDATE`.
+#### Example
+```js
+{
+  "t": 4,
+  "d": {
+    "game": {} // Game object
+  }
+}
+```
+
+### `GAME_PLAYERS_UPDATE`
+- Sent by server.
+- Only sent if the players or spectators of a game change.
+#### Example
+```js
+{
+  "t": 5,
+  "d": {
+    "game": { // Partial game object
+      "id": 123,
+      "players": [], // All players
+      "spectators": [] // All spectators
+    }
+  }
+}
+```
+
+
+### `GAME_DELETE`
+- Sent by server.
+- Sent once a game has ended.
+#### Example
+```js
+{
+  "t": 6,
+  "d": {
+    "game": { // Partial game object
+      "id": 123
+    }
   }
 }
 ```
