@@ -1,10 +1,12 @@
 # Crude Cards - Protocol v1 _(Draft)_
+## REST API
 
 1. Responses must be JSON.
 2. 🔒 indicates that an endpoint requires a valid `authorization` header. If this header is invalid or not present, the server should respond with the code 401.
 3. `?` indicates that a parameter is optional.
 4. All rate-limits provided in this specification are _suggested_ - you can change them if you wish.
 5. Provided rate-limits are in the format `limit/time - mode`, where `time` is the time in seconds, e.g. 5/60 means 5 requests per minute. If `mode` is `token`, then the rate-limits should be applied by the `authorization` header and not the IP address.
+6. All requests made to the server will use HTTPS.
 
 -----
 ## Default Responses
