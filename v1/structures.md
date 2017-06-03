@@ -55,7 +55,7 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
 ```js
 {
   "author": 0, // User ID
-  "timestamp": 1496433919,
+  "time": "2017-06-03T11:30:43.825Z",
   "content": "message content!",
   "channel": 0, // -1 is global, any other number should be a Game ID
 }
