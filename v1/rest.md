@@ -105,11 +105,8 @@ To rate-limit an endpoint, make sure the following headers are present:
 #### Response (200)
 ```js
 {
-  "name": "Test Server",
-  "description": "Description of Server",
-  "apiVersion": 1,
-  "players": 0,
-  "maxPlayers": 16
+  "user": {}, // User object
+  "token": "abc"
 }
 ```
 
