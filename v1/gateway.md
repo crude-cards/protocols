@@ -1,4 +1,4 @@
-# Crude Cards - Protocol v1 _(Gateway)_
+# Crude Cards - Protocol v1 _(Draft)_
 See also: [REST API](rest.md) and [Structures](structures.md)
 ## WebSocket Gateway
 

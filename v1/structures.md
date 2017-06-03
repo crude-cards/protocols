@@ -1,4 +1,5 @@
-## Structures
+# Crude Cards - Protocol v1 _(Draft)_
+## Data Structures
 > Structures for data types used by Crude Cards
 
 See also: [REST API](rest.md) and [Gateway](gateway.md)
