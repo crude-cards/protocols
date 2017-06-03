@@ -1,8 +1,11 @@
 # Crude Cards - Protocol v1 _(Gateway)_
+See also: [REST API](rest.md) and [Structures](structures.md)
 ## WebSocket Gateway
 
-1. All connections will be over `wss` (secure) - `ws` is not supported
-2. Clients are only allowed to connect through `/gateway`
+1. All connections will be over `wss` (secure) - `ws` is not supported.
+2. Clients are only allowed to connect through `/gateway`.
+3. All packets must be valid JSON.
+4. Mentioned structures, e.g. _"User object"_, can be found in the structures documentation (link provided above).
 
 -----
 ## Simple flow

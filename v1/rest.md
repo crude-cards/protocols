@@ -1,4 +1,6 @@
 # Crude Cards - Protocol v1 _(Draft)_
+See also: [Gateway](gateway.md) and [Structures](structures.md)
+
 ## REST API
 
 1. Responses must be JSON.
@@ -7,6 +9,7 @@
 4. All rate-limits provided in this specification are _suggested_ - you can change them if you wish.
 5. Provided rate-limits are in the format `limit/time - mode`, where `time` is the time in seconds, e.g. 5/60 means 5 requests per minute. If `mode` is `token`, then the rate-limits should be applied by the `authorization` header and not the IP address.
 6. All requests made to the server will use HTTPS.
+7. Mentioned structures, e.g. _"User object"_, can be found in the structures documentation (link provided above)
 
 -----
 ## Default Responses
@@ -48,66 +51,6 @@ To rate-limit an endpoint, make sure the following headers are present:
     "reset": 0,
     "retryAfter": 10
   }
-}
-```
-
------
-## Structures
-
-### User
-```js
-{
-  "id": 0,
-  "username": "Bob"
-}
-```
-
-### Game
-```js
-{
-  "id": 0,
-  "owner": 0, // User ID
-  "name": "Test Game",
-  "maxPlayers": 16,
-  "maxSpectators": 5,
-  "public": true,
-  "rules": {
-    "maxScore": 10,
-    "maxRounds": 10, // race condition between score and rounds
-    "czar": 0 // 0 = winner, 1 = random
-  }
-  "players": [], // array of Users
-  "spectators": [], // array of Users
-  "decks": [] // array of Decks used in the game
-}
-```
-
-### Message
-```js
-{
-  "author": 0, // User ID
-  "timestamp": 1496433919,
-  "content": "message content!",
-  "channel": 0, // -1 is global, any other number should be a Game ID
-}
-```
-
-### Card
-```js
-{
-  "type": 0, // 0 = black, 1 = white
-  "id": 0, // unique to a deck
-  "content": "Beep _ boop"
-}
-```
-
-### Deck
-```js
-{
-  "id": 0,
-  "owner": 0, // owner ID
-  "name": "Custom Deck",
-  "cards": [] // an array of Card objects
 }
 ```
 
