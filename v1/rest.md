@@ -74,6 +74,7 @@ To rate-limit an endpoint, make sure the following headers are present:
   - `🔒 POST /api/games/:id/rounds`
   - `(🔒) GET /api/games/:id/rounds`
   - `(🔒) GET /api/games/:id/rounds/:round`
+  - `(🔒) GET /api/games/:id/cards`
 - Messaging
   - `🔒 GET /api/messages/:channel`
   - `🔒 POST /api/messages/:channel`
@@ -478,6 +479,30 @@ Only requires authorization if the game is private.
 }
 ```
 
+### `(🔒) GET /api/games/:id/cards`
+- Authorization only required if game is private.
+- Returns the overall set of cards that are used in this game. Only accessible once the game has started. Once the game has started, the server should compile the decks and generate unique IDs for the cards.
+#### Rate-limiting
+1/10
+#### Response (200)
+```js
+{
+  "cards": [] // Array of Card objects
+}
+```
+#### Response (401, user not part of game)
+```js
+{
+  "message": "You aren't part of this game."
+}
+```
+#### Response (404, game does not exist)
+```js
+{
+  "message": "Game does not exist."
+}
+```
+
 -----
 ## Messaging
 ### `🔒 GET /api/messages/:channel`
@@ -557,7 +582,7 @@ Create a new deck.
 
 #### Parameters
 - `name` - string, up to 32 characters.
-- `cards` - array of objects containing the following properties (the server should generate the ID of the cards by itself.)
+- `cards` - array of objects containing the following properties (the server should generate the ID of the cards when a game starts)
   - `type` - number, 0 = black (call), 1 = white (response)
   - `content` - string, up to 180 characters.
 

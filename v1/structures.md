@@ -67,7 +67,7 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
 ```js
 {
   "type": 0, // 0 = black, 1 = white
-  "id": 0, // unique to a deck
+  "id": 0, // unique to a game, only present when used in the context of a game
   "content": "Beep _ boop"
 }
 ```

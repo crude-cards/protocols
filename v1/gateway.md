@@ -161,9 +161,8 @@ See also: [REST API](rest.md) and [Structures](structures.md)
   "t": 7,
   "d": {
     "round": {}, // Round object
-    "cards": [ // ONLY if the user needs new cards!
-      // contains only the new Card objects
-    ]
+    "allCards": [], // only for the first round, the compiled list of Card objects for this game.
+    "cards": [] // ONLY if the user needs new cards! Contains only the new Card objects.
   }
 }
 ```
