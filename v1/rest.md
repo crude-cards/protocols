@@ -1,4 +1,4 @@
-# Crude Cards - Protocol v1.0.0 _(Draft)_
+# Crude Cards - Protocol v1 _(Draft)_
 
 1. Responses must be JSON.
 2. 🔒 indicates that an endpoint requires a valid `authorization` header. If this header is invalid or not present, the server should respond with the code 401.
