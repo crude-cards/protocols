@@ -18,7 +18,6 @@ See also: [Gateway](gateway.md) and [Structures](structures.md)
 For endpoints that require authorization and invalid authorization is given:
 ```js
 {
-  "code": 401,
   "message": "Authorization required."
 }
 ```
@@ -27,7 +26,6 @@ For endpoints that require authorization and invalid authorization is given:
 If applicable, use an endpoint's specific 404 response, otherwise respond with the following JSON and error code 404:
 ```js
 {
-  "code": 404,
   "message": "Resource not found."
 }
 ```
@@ -44,7 +42,6 @@ To rate-limit an endpoint, make sure the following headers are present:
 #### Response (429)
 ```js
 {
-  "code": 429,
   "message": "You are being rate-limited.",
   "meta": { // the meta field is optional, but if provided it MUST contain these properties.
     "limit": 0,
