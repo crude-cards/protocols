@@ -160,9 +160,10 @@ To rate-limit an endpoint, make sure the following headers are present:
 - `?password` - if present, game is private.
 - `maxPlayers` - integer, up to 32.
 - `maxSpectators` - integer, up to 32.
-- `rules` - object containing following properties
-  - `maxScore` - integer, up to 100
-  - `maxRounds` - integer up to 100
+- `rules` - object containing following properties. At least `maxScore` or `maxRounds` must be enabled.
+  - `maxScore` - integer, up to 100. -1 to disable.
+  - `maxRounds` - integer up to 100. -1 to disable.
+  - `maxRoundTime` - integer up to 600. -1 to disable.
   - `czar` - integer, 0 = winner, 1 = random. Other values are invalid.
 - `decks` - Array of Deck IDs. At least 1 deck is required.
 

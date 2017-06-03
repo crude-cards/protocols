@@ -22,8 +22,10 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
   "maxSpectators": 5,
   "public": true,
   "rules": {
-    "maxScore": 10,
-    "maxRounds": 10, // race condition between score and rounds
+    // race between score, rounds and time
+    "maxScore": 10, // maximum score, -1 disables the rule
+    "maxRounds": 10, // maximum rounds, -1 disables the rule
+    "maxRoundTime": 60, // maximum amount of time a round can last, -1 disables the rule
     "czar": 0 // 0 = winner, 1 = random
   },
   "currentRound": {}, // Round object, can be null if game has not started
