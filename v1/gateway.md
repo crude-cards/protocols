@@ -39,7 +39,7 @@
 7. `GAME_ROUND_START`
     -	Sent by server when a new round in a game has started.
 8. `GAME_ROUND_END`
-    -	Sent by server when a new round in a game has started.
+    -	Sent by server when the current round in a game has ended.
 ### Users
 9. `USER_CREATE`
     -	Sent by server.
@@ -86,6 +86,9 @@
 }
 ```
 
+-----
+## Game Packets
+
 ### `GAME_CREATE`
 - Sent by server.
 - Once a client authenticates, they should be sent ~20 games.
@@ -130,10 +133,9 @@
 }
 ```
 
-
 ### `GAME_DELETE`
 - Sent by server.
-- Sent once a game has ended.
+- Sent once a game has ended or been deleted.
 #### Example
 ```js
 {
@@ -142,6 +144,75 @@
     "game": { // Partial game object
       "id": 123
     }
+  }
+}
+```
+
+### `GAME_ROUND_START`
+- Sent by server when a new round has started.
+- If a player needs new cards, they should also be sent the `cards` array, containing new cards.
+
+#### Example
+```js
+{
+  "t": 7,
+  "d": {
+    "game": {
+      "id": 123
+    }
+    "round": 0, // The round number (start at 0)
+    "czar": 0, // User ID of new czar
+    "blackCard": 0, // ID of the black card
+    "cards": [ // ONLY if the user needs new cards!
+      // contains only the new Card objects
+    ]
+  }
+}
+```
+
+### `GAME_ROUND_END`
+- Sent by server once a round has ended.
+
+#### Example
+```js
+{
+  "t": 8,
+  "d": {
+    "game": {
+      "id": 123
+    }
+    "round": 0, // Round number
+    "winner": 0 // User ID
+  }
+}
+```
+
+-----
+## Users
+### `USER_CREATE`
+- Sent by server.
+- Does not necessarily mean a user has just joined the gateway.
+- Send to a client if you want the client to cache this user in particular.
+
+#### Example
+```js
+{
+  "t": 9,
+  "d": {
+    "user": {} // User object
+  }
+}
+```
+
+### `USER_UPDATE`
+- Sent by server when any property of a User object has changed.
+
+#### Example
+```js
+{
+  "t": 10,
+  "d": {
+    "user": {} // User object
   }
 }
 ```
