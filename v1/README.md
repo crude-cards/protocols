@@ -6,7 +6,7 @@ This is a draft of the proposed v1 protocol for Crude Cards:
 - [REST Protocol](rest.md)
 - [WebSocket Gateway](gateway.md)
 
------
+---
 ## Contributing
 If you would like to weigh in on the current protocol draft, you can comment on the [issue](https://github.com/crude-cards/protocols/issues/1) here.
 
