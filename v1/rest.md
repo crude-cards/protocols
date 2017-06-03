@@ -5,11 +5,12 @@ See also: [Gateway](gateway.md) and [Structures](structures.md)
 
 1. Responses must be JSON.
 2. 🔒 indicates that an endpoint requires a valid `authorization` header. If this header is invalid or not present, the server should respond with the code 401.
-3. `?` indicates that a parameter is optional.
-4. All rate-limits provided in this specification are _suggested_ - you can change them if you wish.
-5. Provided rate-limits are in the format `limit/time - mode`, where `time` is the time in seconds, e.g. 5/60 means 5 requests per minute. If `mode` is `token`, then the rate-limits should be applied by the `authorization` header and not the IP address.
-6. All requests made to the server will use HTTPS.
-7. Mentioned structures, e.g. _"User object"_, can be found in the structures documentation (link provided above)
+3. (🔒) indicates that authorization may not always be required (see endpoints for specific information.)
+4. `?` indicates that a parameter is optional.
+5. All rate-limits provided in this specification are _suggested_ - you can change them if you wish.
+6. Provided rate-limits are in the format `limit/time - mode`, where `time` is the time in seconds, e.g. 5/60 means 5 requests per minute. If `mode` is `token`, then the rate-limits should be applied by the `authorization` header and not the IP address.
+7. All requests made to the server will use HTTPS.
+8. Mentioned structures, e.g. _"User object"_, can be found in the structures documentation (link provided above)
 
 -----
 ## Default Responses
@@ -65,11 +66,14 @@ To rate-limit an endpoint, make sure the following headers are present:
 - Games
   - `🔒 GET /api/games`
   - `🔒 POST /api/games`
-  - `(🔒) GET /api/games/:id` (🔒 if game is private)
+  - `(🔒) GET /api/games/:id`
   - `🔒 PATCH /api/games/:id`
   - `🔒 DELETE /api/games/:id`
   - `🔒 POST /api/games/:id`
   - `🔒 POST /api/games/:id/select`
+  - `🔒 POST /api/games/:id/rounds`
+  - `(🔒) GET /api/games/:id/rounds`
+  - `(🔒) GET /api/games/:id/rounds/:round`
 - Messaging
   - `🔒 GET /api/messages/:channel`
   - `🔒 POST /api/messages/:channel`
@@ -376,6 +380,100 @@ If the czar calls this, it specifies the winning player. All other players call 
 ```js
 {
   "message": "Some of those cards were not found."
+}
+```
+
+### `🔒 POST /api/games/:id/rounds`
+Can only be used by the game owner, starts the game.
+#### Response (201)
+```js
+// success
+```
+
+#### Response (400, game already started)
+```js
+{
+  "message": "The game has already started."
+}
+```
+
+#### Response (401, user not owner)
+```js
+{
+  "message": "You do not have authorization to start this game."
+}
+```
+
+#### Response (404, game does not exist)
+```js
+{
+  "message": "Game does not exist."
+}
+```
+
+### `(🔒) GET /api/games/:id/rounds`
+Only requires authorization if the game is private.
+#### Rate-limiting
+1/10
+#### Parameters
+- `?rounds` - can be an array of integers:
+  - `[1,4,5]` would only select the second, fifth and sixth rounds.
+  - `[-1, -2, -3]` would return the last 3 rounds.
+  - If no value is given, all rounds are returned.
+#### Response (200)
+```js
+{
+  "rounds": [] // array of Round objects
+}
+```
+#### Response (200, invalid round selection defaults to all rounds)
+```js
+{
+  "rounds": [] // array of Round objects
+}
+```
+#### Response (401, user does not have authorization to view this game)
+```js
+{
+  "message": "You do not have authorization to view this game"
+}
+```
+#### Response (404, game does not exist)
+```js
+{
+  "message": "Game does not exist."
+}
+```
+
+### `(🔒) GET /api/games/:id/rounds/:round`
+- Only requires authorization if the game is private.
+- `:round` can be:
+  - an integer, the round number.
+  - a string, `current` to get the current round.
+#### Rate-limiting
+1/10
+#### Response (200)
+```js
+{
+  "round": {} // Round object
+}
+```
+#### Response (400, invalid round selection)
+```js
+{
+  "message": "Invalid round selection"
+}
+```
+#### Response (401, user does not have authorization to view this game)
+```js
+{
+  "message": "You do not have authorization to view this game"
+}
+```
+#### Response (404, round does not exist)
+```js
+{
+  "message": "Round does not exist."
 }
 ```
 

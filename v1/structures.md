@@ -25,10 +25,29 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
     "maxScore": 10,
     "maxRounds": 10, // race condition between score and rounds
     "czar": 0 // 0 = winner, 1 = random
-  }
+  },
+  "currentRound": {}, // Round object, can be null if game has not started
   "players": [], // array of Users
   "spectators": [], // array of Users
   "decks": [] // array of Decks used in the game
+}
+```
+
+### Round
+```js
+{
+  "id": 0,
+  "game": 0, // Game ID
+  "startTime": "2017-06-03T11:30:23.825Z",
+  "blackCard": {}, // card object
+  "czar": {}, // user object
+
+  // following only present once the round has been completed:
+  "endTime": "2017-06-03T11:30:43.825Z",
+  "winner": {
+    "user": {}, // user object
+    "cards": [] // array of cards used
+  }
 }
 ```
 

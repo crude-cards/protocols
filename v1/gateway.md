@@ -160,12 +160,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 {
   "t": 7,
   "d": {
-    "game": {
-      "id": 123
-    }
-    "round": 0, // The round number (start at 0)
-    "czar": 0, // User ID of new czar
-    "blackCard": 0, // ID of the black card
+    "round": {}, // Round object
     "cards": [ // ONLY if the user needs new cards!
       // contains only the new Card objects
     ]
@@ -181,11 +176,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 {
   "t": 8,
   "d": {
-    "game": {
-      "id": 123
-    }
-    "round": 0, // Round number
-    "winner": 0 // User ID
+    "round": {} // Round object
   }
 }
 ```
