@@ -49,6 +49,9 @@ See also: [REST API](rest.md) and [Structures](structures.md)
     - Does not necessarily mean a user has just joined the gateway.
 10. `USER_UPDATE`
     - Sent when a user updates their details.
+### Messaging
+11. `MESSAGE_CREATE`
+		- Sent when a message is created.
 
 -----
 
@@ -207,5 +210,23 @@ See also: [REST API](rest.md) and [Structures](structures.md)
   "d": {
     "user": {} // User object
   }
+}
+```
+
+-----
+## Messaging
+### `MESSAGE_CREATE`
+- Sent by server when a message is created in a channel the receiver has access to.
+
+#### Example
+```js
+{
+	"t": 11,
+	"d": {
+		"channel_id": "<channel ID>",
+		"content": "<content>",
+		"timestamp": "2017-06-03T11:30:23.825Z",
+		"author": {} // User object
+	}
 }
 ```
