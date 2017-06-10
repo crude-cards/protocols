@@ -66,7 +66,7 @@ To rate-limit an endpoint, make sure the following headers are present:
   - `(🔒) GET /api/games/:id`
   - `🔒 PATCH /api/games/:id`
   - `🔒 DELETE /api/games/:id`
-  - `🔒 POST /api/games/:id`
+  - `🔒 POST /api/games/:id/join`
   - `🔒 POST /api/games/:id/select`
   - `🔒 POST /api/games/:id/rounds`
   - `(🔒) GET /api/games/:id/rounds`
@@ -289,7 +289,7 @@ Deletes/leaves the current game. The owner can end the game by calling this endp
 }
 ```
 
-### `🔒 POST /api/games/:id`
+### `🔒 POST /api/games/:id/join`
 #### Rate-limiting
 - 3/10 token
 
