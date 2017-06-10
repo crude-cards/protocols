@@ -67,10 +67,11 @@ To rate-limit an endpoint, make sure the following headers are present:
   - `🔒 PATCH /api/games/:id`
   - `🔒 DELETE /api/games/:id`
   - `🔒 POST /api/games/:id/join`
-  - `🔒 POST /api/games/:id/select`
   - `🔒 POST /api/games/:id/rounds`
   - `(🔒) GET /api/games/:id/rounds`
   - `(🔒) GET /api/games/:id/rounds/:round`
+  - `🔒 POST /api/games/:id/rounds/:round/cards`
+  - `🔒 POST /api/games/:id/rounds/:round/winner`
   - `(🔒) GET /api/games/:id/cards`
 - Messaging
   - `🔒 GET /api/messages/:channel`
@@ -319,66 +320,6 @@ Joins the specified game.
 }
 ```
 
-### `🔒 POST /api/games/:id/select`
-If the czar calls this, it specifies the winning player. All other players call this to put forward their choice of cards. The round should be ended immediately after the czar picks the winner.
-
-#### Rate-limiting
-- 1/10 token
-
-#### Parameters (czar only)
-- `player` - integer, ID of winning player
-
-#### Parameters (all other players)
-- `cards` - an array containing objects with the following properties:
-  - `deck` - integer, ID of deck
-  - `card` - integer, ID of card in the deck
-
-
-#### Response (400, round has not started)
-```js
-{
-  "message": "The round has not yet started."
-}
-```
-
-#### Response (404, game does not exist)
-```js
-{
-  "message": "Game does not exist."
-}
-```
-
-#### Response (czar only) (201)
-```js
-// winner chosen
-```
-
-#### Response (czar only) (404)
-```js
-{
-  "message": "That player has not put any cards forward."
-}
-```
-
-#### Response (all other players) (201)
-```js
-// card(s) successfully put forward
-```
-
-#### Response (all other players) (400, cards already put forward)
-```js
-{
-  "message": "You have put cards forward already."
-}
-```
-
-#### Response (all other players) (404)
-```js
-{
-  "message": "Some of those cards were not found."
-}
-```
-
 ### `🔒 POST /api/games/:id/rounds`
 Can only be used by the game owner, starts the game.
 #### Response (201)
@@ -471,6 +412,92 @@ Only requires authorization if the game is private.
 {
   "message": "Round does not exist."
 }
+```
+
+### `🔒 POST /api/games/:id/rounds/:round/cards`
+Players call this to put forward their choice of cards.
+
+#### Rate-limiting
+- 1/10 token
+
+#### Parameters
+- `cards` - an array containing objects with the following properties:
+  - `deck` - integer, ID of deck
+  - `card` - integer, ID of card in the deck
+
+#### Response (400, round has ended)
+```js
+{
+  "message": "The round is not active."
+}
+```
+
+#### Response (400, cards already put forward)
+```js
+{
+  "message": "You have put cards forward already."
+}
+```
+
+#### Response (400, invalid selection of cards, e.g. cards player doesn't have)
+```js
+{
+  "message": "Invalid card selection."
+}
+```
+
+#### Response (404, game or round do not exist)
+```js
+{
+  "message": "Game or Round do not exist."
+}
+```
+
+#### Response (201)
+```js
+// card(s) successfully put forward
+```
+
+### `🔒 POST /api/games/:id/rounds/:round/winner`
+Called by the czar to select a winner of the current round. The round should be ended immediately after the czar picks the winner.
+
+#### Rate-limiting
+- 1/10 token
+
+#### Parameters
+- `player` - integer, ID of winning player
+
+#### Response (400, round has ended)
+```js
+{
+  "message": "That round is not active."
+}
+```
+
+#### Response (400, user hasn't put cards forward)
+```js
+{
+  "message": "That user hasn't put any cards forward."
+}
+```
+
+#### Response (401, user not czar)
+```js
+{
+  "message": "You are not the czar."
+}
+```
+
+#### Response (404, game or round do not exist)
+```js
+{
+  "message": "Game or Round do not exist."
+}
+```
+
+#### Response (201)
+```js
+// winner chosen
 ```
 
 ### `(🔒) GET /api/games/:id/cards`
