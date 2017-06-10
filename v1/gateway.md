@@ -51,7 +51,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
     - Sent when a user updates their details.
 ### Messaging
 11. `MESSAGE_CREATE`
-		- Sent when a message is created.
+    - Sent when a message is created.
 
 -----
 
@@ -164,7 +164,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
   "t": 7,
   "d": {
     "round": {}, // Round object
-    "allCards": [], // only for the first round, the compiled list of Card objects for this game.
+    "all_cards": [], // only for the first round, the compiled list of Card objects for this game.
     "cards": [] // ONLY if the user needs new cards! Contains only the new Card objects.
   }
 }
@@ -221,12 +221,12 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 #### Example
 ```js
 {
-	"t": 11,
-	"d": {
-		"channel_id": "<channel ID>",
-		"content": "<content>",
-		"timestamp": "2017-06-03T11:30:23.825Z",
-		"author": {} // User object
-	}
+  "t": 11,
+  "d": {
+    "channel_id": "<channel ID>",
+    "content": "<content>",
+    "timestamp": "2017-06-03T11:30:23.825Z",
+    "author": {} // User object
+  }
 }
 ```

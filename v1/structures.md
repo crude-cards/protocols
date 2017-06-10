@@ -18,17 +18,17 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
   "id": 0,
   "owner": 0, // User ID
   "name": "Test Game",
-  "maxPlayers": 16,
-  "maxSpectators": 5,
+  "max_players": 16,
+  "max_spectators": 5,
   "public": true,
   "rules": {
     // race between score, rounds and time
-    "maxScore": 10, // maximum score, -1 disables the rule
-    "maxRounds": 10, // maximum rounds, -1 disables the rule
-    "maxRoundTime": 60, // maximum amount of time a round can last, -1 disables the rule
+    "max_score": 10, // maximum score, -1 disables the rule
+    "max_rounds": 10, // maximum rounds, -1 disables the rule
+    "max_round_time": 60, // maximum amount of time a round can last, -1 disables the rule
     "czar": 0 // 0 = winner, 1 = random
   },
-  "currentRound": {}, // Round object, can be null if game has not started
+  "current_round": {}, // Round object, can be null if game has not started
   "players": [], // array of Users
   "spectators": [], // array of Users
   "decks": [] // array of Decks used in the game
@@ -40,12 +40,12 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
 {
   "id": 0,
   "game": 0, // Game ID
-  "startTime": "2017-06-03T11:30:23.825Z",
+  "start_time": "2017-06-03T11:30:23.825Z",
   "blackCard": {}, // card object
   "czar": {}, // user object
 
   // following only present once the round has been completed:
-  "endTime": "2017-06-03T11:30:43.825Z",
+  "end_time": "2017-06-03T11:30:43.825Z",
   "winner": {
     "user": {}, // user object
     "cards": [] // array of cards used
