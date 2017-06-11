@@ -108,19 +108,6 @@ To rate-limit an endpoint, make sure the following headers are present:
 }
 ```
 
-### `POST /api/authenticate`
-#### Rate-limiting
-- 5/60
-#### Parameters
-- `?username` - string, up to 20 characters. Server should generate a random username if one is not present.
-#### Response (200)
-```js
-{
-  "user": {}, // ExtendedUser object
-  "token": "abc"
-}
-```
-
 ### `POST /api/authenticate/discord`
 #### Rate-limiting
 - 5/60
