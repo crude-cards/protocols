@@ -120,7 +120,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 
 ### `GAME_UPDATE`
 - Sent by server.
-- Only sent if any properties of the normal Game object change, except `players` or `spectators` - they use `GAME_PLAYERS_UPDATE`.
+- Only sent if any properties of the normal Game object change, except `players` or `spectators` - they use `GAME_PLAYERS_JOIN` and `GAME_PLAYERS_LEAVE`.
 #### Example
 ```js
 {
