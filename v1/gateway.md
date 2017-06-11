@@ -64,7 +64,8 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 {
   "t": 0,
   "d": {
-    "token": "abc123"
+    "token": "abc123",
+    "resume": true // if true, indicates the client wants to resume an existing connection
   }
 }
 ```
@@ -87,7 +88,13 @@ See also: [REST API](rest.md) and [Structures](structures.md)
   "t": 2,
   "d": {
     "heartbeat": 60000,
-    "user": {} // User object
+    "user": {}, // User object
+    "resumed": true, // whether or not the session could be resumed
+    // following only present if resumed
+    "resume_data": {
+      "game": {}, // Game object, present if user was in a game
+      "cards": [] // User's cards
+    }
   }
 }
 ```
