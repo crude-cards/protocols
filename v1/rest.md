@@ -112,7 +112,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 #### Rate-limiting
 - 5/60
 #### Parameters
-- `?username` - string, alphanumeric, up to 20 characters. Server should generate a random username if one is not present.
+- `?username` - string, up to 20 characters. Server should generate a random username if one is not present.
 #### Response (200)
 ```js
 {
@@ -239,7 +239,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 ## Users
 ### `🔒 PATCH /api/users/:id`
 #### Parameters
-- `?username` - string, alphanumeric, up to 20 characters.
+- `?username` - string, up to 20 characters.
 - `?bio` - string, up to 120 characters.
 #### Rate-limiting
 - 10/10
