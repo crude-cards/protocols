@@ -603,7 +603,7 @@ Create a new deck.
 - `name` - string, up to 32 characters.
 - `cards` - array of objects containing the following properties (the server should generate the ID of the cards when a game starts)
   - `type` - number, 0 = black (call), 1 = white (response)
-  - `content` - string, up to 180 characters.
+  - `text` - string, up to 180 characters.
 
 #### Response (200)
 ```js

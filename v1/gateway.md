@@ -156,7 +156,6 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 
 ### `GAME_ROUND_START`
 - Sent by server when a new round has started.
-- If a player needs new cards, they should also be sent the `cards` array, containing new cards.
 
 #### Example
 ```js
@@ -164,8 +163,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
   "t": 7,
   "d": {
     "round": {}, // Round object
-    "all_cards": [], // only for the first round, the compiled list of Card objects for this game.
-    "cards": [] // ONLY if the user needs new cards! Contains only the new Card objects.
+    "cards": [] // The player's current cards (Array of Card objects)
   }
 }
 ```

@@ -41,14 +41,14 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
   "id": 0,
   "game": 0, // Game ID
   "start_time": "2017-06-03T11:30:23.825Z",
-  "blackCard": {}, // card object
-  "czar": {}, // user object
+  "blackCard": {}, // Card object
+  "czar": {}, // User object
 
   // following only present once the round has been completed:
   "end_time": "2017-06-03T11:30:43.825Z",
   "winner": {
     "user": {}, // user object
-    "cards": [] // array of cards used
+    "cards": [] // array of Cards used
   }
 }
 ```
@@ -68,7 +68,7 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
 {
   "type": 0, // 0 = black, 1 = white
   "id": "deck_id:n", // completely unique
-  "content": "Beep _ boop"
+  "text": "Beep _ boop"
 }
 ```
 
