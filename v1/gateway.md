@@ -35,22 +35,24 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 4. `GAME_UPDATE`
     - Sent by server.
     - Only sent if there are changes to the configuration of a game, not if there is a new round or winner.
-5. `GAME_PLAYERS_UPDATE`
-    - Sent by server when a player joins/leaves a game.
-6. `GAME_DELETE`
+5. `GAME_PLAYERS_JOIN`
+    - Sent by server when players join a game.
+6. `GAME_PLAYERS_LEAVE`
+    - Sent by server when players leave a game.
+7. `GAME_DELETE`
     -	Sent by server once a game has been deleted or ended.
-7. `GAME_ROUND_START`
+8. `GAME_ROUND_START`
     -	Sent by server when a new round in a game has started.
-8. `GAME_ROUND_END`
+9. `GAME_ROUND_END`
     -	Sent by server when the current round in a game has ended.
 ### Users
-9. `USER_CREATE`
+10. `USER_CREATE`
     -	Sent by server.
     - Does not necessarily mean a user has just joined the gateway.
-10. `USER_UPDATE`
+11. `USER_UPDATE`
     - Sent when a user updates their details.
 ### Messaging
-11. `MESSAGE_CREATE`
+12. `MESSAGE_CREATE`
     - Sent when a message is created.
 
 -----
@@ -152,7 +154,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 #### Example
 ```js
 {
-  "t": 5,
+  "t": 6,
   "d": {
     "game": { // Partial game object
       "id": 123,
@@ -169,7 +171,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 #### Example
 ```js
 {
-  "t": 6,
+  "t": 7,
   "d": {
     "game": { // Partial game object
       "id": 123
@@ -184,7 +186,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 #### Example
 ```js
 {
-  "t": 7,
+  "t": 8,
   "d": {
     "round": {}, // Round object
     "cards": [] // The player's current cards (Array of Card objects)
@@ -198,7 +200,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 #### Example
 ```js
 {
-  "t": 8,
+  "t": 9,
   "d": {
     "round": {} // Round object
   }
@@ -215,7 +217,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 #### Example
 ```js
 {
-  "t": 9,
+  "t": 10,
   "d": {
     "user": {} // User object
   }
@@ -228,7 +230,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 #### Example
 ```js
 {
-  "t": 10,
+  "t": 11,
   "d": {
     "user": {} // new User object
   }
@@ -243,7 +245,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 #### Example
 ```js
 {
-  "t": 11,
+  "t": 12,
   "d": {
     "channel_id": "<channel ID>",
     "content": "<content>",
