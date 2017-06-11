@@ -306,7 +306,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 }
 ```
 
-#### Response (403, owner already in a game)
+#### Response (400, owner already in a game)
 ```js
 {
   "message": "You are already in a game."
@@ -608,7 +608,7 @@ Called by the czar to select a winner of the current round. The round should be 
 }
 ```
 
-#### Response (401, user not czar)
+#### Response (403, user not czar)
 ```js
 {
   "message": "You are not the czar."
