@@ -269,7 +269,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 ### `🔒 GET /api/games`
 #### Rate-limiting
 - 5/10 token
-#### Parameters
+#### Parameters (query strings)
 - `?joinable` - boolean, defaults to false. If true, only games that can be joined (i.e. not full) are displayed
 
 #### Response (200)
@@ -491,10 +491,10 @@ Can only be used by the game owner, starts the game.
 Only requires authorization if the game is private.
 #### Rate-limiting
 1/10
-#### Parameters
-- `?rounds` - can be an array of integers:
-  - `[1,4,5]` would only select the second, fifth and sixth rounds.
-  - `[-1, -2, -3]` would return the last 3 rounds.
+#### Parameters (query string)
+- `?rounds` - a comma-delimited array of integers (e.g. `?round=1,2,3`):
+  - `1,4,5` would only select the second, fifth and sixth rounds.
+  - `-1,-2,-3` would return the last 3 rounds.
   - If no value is given, all rounds are returned.
 #### Response (200)
 ```js
