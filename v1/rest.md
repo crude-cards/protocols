@@ -427,11 +427,19 @@ Joins the specified game.
 
 #### Parameters
 - `?password` - string, required if the game is private.
+- `?spectator` - boolean, if true then join as a spectator.
 
 #### Response (200)
 ```js
 {
   "game": {} // Game object
+}
+```
+
+#### Response (400, game is full)
+```js
+{
+  "message": "Game is full."
 }
 ```
 
