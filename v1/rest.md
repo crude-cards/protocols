@@ -288,7 +288,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 - `rules` - object containing following properties. At least `maxScore` or `maxRounds` must be enabled.
   - `max_score` - integer, up to 100. -1 to disable.
   - `max_rounds` - integer up to 100. -1 to disable.
-  - `max_round_Time` - integer up to 600. -1 to disable.
+  - `max_round_time` - integer up to 600. -1 to disable.
   - `czar` - integer, 0 = winner, 1 = random. Other values are invalid.
 - `decks` - Array of Deck IDs. At least 1 deck is required.
 
