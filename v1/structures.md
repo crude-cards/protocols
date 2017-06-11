@@ -68,12 +68,12 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
   "game": 0, // Game ID
   "start_time": "2017-06-03T11:30:23.825Z",
   "blackCard": {}, // Card object
-  "czar": {}, // User object
+  "czar": 0, // User ID
 
   // following only present once the round has been completed:
   "end_time": "2017-06-03T11:30:43.825Z",
   "winner": {
-    "user": {}, // user object
+    "user": 1, // user ID
     "cards": [] // array of Cards used
   }
 }
