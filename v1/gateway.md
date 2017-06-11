@@ -245,7 +245,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 {
   "t": 12,
   "d": {
-    "channel_id": "<channel ID>",
+    "channel_id": 0,
     "content": "<content>",
     "timestamp": "2017-06-03T11:30:23.825Z",
     "author": {} // User object
