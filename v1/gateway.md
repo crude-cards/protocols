@@ -173,9 +173,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 {
   "t": 7,
   "d": {
-    "game": { // Partial game object
-      "id": 123
-    }
+    "game_id": 123
   }
 }
 ```
