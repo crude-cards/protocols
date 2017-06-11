@@ -30,6 +30,14 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
 }
 ```
 
+### Profile
+```js
+{
+  "user": {}, // User object
+  "bio": "" // up to 120 characters
+}
+```
+
 ### Game
 ```js
 {

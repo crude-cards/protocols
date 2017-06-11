@@ -67,6 +67,7 @@ To rate-limit an endpoint, make sure the following headers are present:
   - `🔒 DELETE /api/integrations/google`
 - Users
   - `🔒 GET /api/users/:id`
+  - `🔒 PATCH /api/users/:id`
 - Games
   - `🔒 GET /api/games`
   - `🔒 POST /api/games`
@@ -222,10 +223,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 #### Response (200)
 ```js
 {
-  "user": {
-    "username": "Bob",
-    "id": 0
-  }
+  "profile": {} // Profile object. `user` property is an ExtendedUser if client's id matches requested ID.
 }
 ```
 
@@ -233,6 +231,34 @@ To rate-limit an endpoint, make sure the following headers are present:
 ```js
 {
   "message": "User not found."
+}
+```
+
+## Users
+### `🔒 PATCH /api/users/:id`
+#### Parameters
+- `?username` - string, alphanumeric, up to 20 characters.
+- `?bio` - string, up to 120 characters.
+#### Rate-limiting
+- 10/10
+#### Response (200)
+```js
+{
+  "profile": {} // Profile object. `user` property is an ExtendedUser if client's id matches requested ID.
+}
+```
+
+#### Response (400, bad username or bio)
+```js
+{
+  "message": "Bad username or bio."
+}
+```
+
+#### Response (403)
+```js
+{
+  "message": "You can only edit your own profile."
 }
 ```
 

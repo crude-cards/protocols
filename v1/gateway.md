@@ -216,14 +216,14 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 ```
 
 ### `USER_UPDATE`
-- Sent by server when any property of a User object has changed.
+- Sent by server when any property of a User object has changed (i.e. only a username)
 
 #### Example
 ```js
 {
   "t": 10,
   "d": {
-    "user": {} // User object
+    "user": {} // new User object
   }
 }
 ```
