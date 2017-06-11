@@ -122,9 +122,9 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 }
 ```
 
-### `GAME_PLAYERS_UPDATE`
+### `GAME_PLAYERS_JOIN`
 - Sent by server.
-- Only sent if the players or spectators of a game change.
+- Only sent if new players/spectators join a game.
 #### Example
 ```js
 {
@@ -132,8 +132,25 @@ See also: [REST API](rest.md) and [Structures](structures.md)
   "d": {
     "game": { // Partial game object
       "id": 123,
-      "players": [], // All players
-      "spectators": [] // All spectators
+      "players": [], // New players
+      "spectators": [] // New spectators
+    }
+  }
+}
+```
+
+### `GAME_PLAYERS_LEAVE`
+- Sent by server.
+- Only sent if players/spectators of a game leave.
+#### Example
+```js
+{
+  "t": 5,
+  "d": {
+    "game": { // Partial game object
+      "id": 123,
+      "players": [], // Players that have left
+      "spectators": [] // Spectators that have left
     }
   }
 }
