@@ -599,7 +599,8 @@ Create a new deck.
 #### Rate-limiting
 - 1/30 token
 
-#### Parameters
+#### Parameters (normal usage)
+- `?cardcast_id` - string, up to 8 characters. If present, no other parameters can be supplied.
 - `name` - string, up to 32 characters.
 - `cards` - array of objects containing the following properties (the server should generate the ID of the cards when a game starts)
   - `type` - number, 0 = black (call), 1 = white (response)
@@ -616,6 +617,13 @@ Create a new deck.
 ```js
 {
   "message": "Invalid data."
+}
+```
+
+#### Response (404, card cast deck not found)
+```js
+{
+  "message": "Deck not accessible on Card Cast."
 }
 ```
 

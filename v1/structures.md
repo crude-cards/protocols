@@ -78,6 +78,7 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
   "id": 0,
   "owner": 0, // owner ID
   "name": "Custom Deck",
+  "external": false, // true if the deck comes from Card Cast
   "cards": [] // an array of Card objects
 }
 ```
