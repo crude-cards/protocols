@@ -697,7 +697,7 @@ Posts a message to this channel.
 - 10/10 token, different for each channel.
 
 #### Parameters
-- `content` - string, up to 1,000 characters - make sure to sanitise!
+- `content` - string, up to 1,000 characters - make sure to sanitise server-side!
 
 #### Response (200)
 ```js
