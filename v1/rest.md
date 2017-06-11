@@ -217,7 +217,7 @@ The endpoint should _only_ require authentication if the game is private. In thi
 Only the owner of a game is allowed to call this endpoint.
 
 #### Parameters
-- Same parameters provided to `🔒 POST /api/games`
+- Same parameters provided to `🔒 POST /api/games`, but additionally:
 - `?owner` - integer, user ID of new owner (must be a player, otherwise 400)
 
 #### Response (200)
@@ -421,9 +421,7 @@ Players call this to put forward their choice of cards.
 - 1/10 token
 
 #### Parameters
-- `cards` - an array containing objects with the following properties:
-  - `deck` - integer, ID of deck
-  - `card` - integer, ID of card in the deck
+- `cards` - an array containing card IDs.
 
 #### Response (400, round has ended)
 ```js

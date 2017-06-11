@@ -31,7 +31,7 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
   "current_round": {}, // Round object, can be null if game has not started
   "players": [], // array of Users
   "spectators": [], // array of Users
-  "decks": [] // array of Decks used in the game
+  "decks": [] // array of Deck IDs
 }
 ```
 
@@ -67,7 +67,7 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
 ```js
 {
   "type": 0, // 0 = black, 1 = white
-  "id": 0, // unique to a game, only present when used in the context of a game
+  "id": "deck_id:n", // completely unique
   "content": "Beep _ boop"
 }
 ```
