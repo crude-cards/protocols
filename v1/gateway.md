@@ -60,7 +60,7 @@ See also: [REST API](rest.md) and [Structures](structures.md)
 ## Meta Packets
 ### `IDENTIFY`
 - Sent by client.
-- If the token is invalid, the server should disconnect the client from the gateway with code 1000.
+- If the token is invalid, the server should disconnect the client from the gateway with code 4001.
 #### Example
 ```js
 {
