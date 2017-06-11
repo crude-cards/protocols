@@ -58,6 +58,13 @@ To rate-limit an endpoint, make sure the following headers are present:
 - Meta and Authentication
   - `GET /api/meta`
   - `POST /api/authenticate`
+  - `POST /api/authenticate/discord`
+  - `POST /api/authenticate/google`
+- Integrations
+  - `🔒 POST /api/integrations/discord`
+  - `🔒 DELETE /api/integrations/discord`
+  - `🔒 POST /api/integrations/google`
+  - `🔒 DELETE /api/integrations/google`
 - Users
   - `🔒 GET /api/users/:id`
 - Games
@@ -106,8 +113,104 @@ To rate-limit an endpoint, make sure the following headers are present:
 #### Response (200)
 ```js
 {
-  "user": {}, // User object
+  "user": {}, // ExtendedUser object
   "token": "abc"
+}
+```
+
+### `POST /api/authenticate/discord`
+#### Rate-limiting
+- 5/60
+#### Parameters
+- `code` - string, OAuth code from Discord.
+#### Response (200)
+```js
+{
+  "user": {}, // ExtendedUser object
+  "token": "abc"
+}
+```
+#### Response (401, bad code or cannot fetch user details using token)
+```js
+{
+  "message": "Bad authorization code provided"
+}
+```
+
+### `POST /api/authenticate/google`
+#### Rate-limiting
+- 5/60
+#### Parameters
+- `code` - string, OAuth code from Google.
+#### Response (200)
+```js
+{
+  "user": {}, // ExtendedUser object
+  "token": "abc"
+}
+```
+#### Response (401, bad code or cannot fetch user details using token)
+```js
+{
+  "message": "Bad authorization code provided"
+}
+```
+
+-----
+## Integrations
+### `🔒 POST /api/integrations/discord`
+#### Parameters
+- `code` - string, OAuth code from Discord.
+#### Response (200)
+```js
+{
+  "user": {}, // ExtendedUser object
+}
+```
+#### Response (401, bad code or cannot fetch user details using token)
+```js
+{
+  "message": "Bad authorization code provided"
+}
+```
+
+### `🔒 DELETE /api/integrations/discord`
+#### Response (201)
+```js
+// success
+```
+#### Response (404, no discord integration)
+```js
+{
+  "message": "No Discord integration to delete"
+}
+```
+
+### `🔒 POST /api/integrations/google`
+#### Parameters
+- `code` - string, OAuth code from Google.
+#### Response (200)
+```js
+{
+  "user": {}, // ExtendedUser object
+}
+```
+#### Response (401, bad code or cannot fetch user details using token)
+```js
+{
+  "message": "Bad authorization code provided"
+}
+```
+
+### `🔒 DELETE /api/integrations/google`
+#### Response (201)
+```js
+// success
+```
+#### Response (404, no Google+ integration)
+```js
+{
+  "message": "No Google+ integration to delete"
 }
 ```
 

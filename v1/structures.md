@@ -12,6 +12,24 @@ See also: [REST API](rest.md) and [Gateway](gateway.md)
 }
 ```
 
+### ExtendedUser
+```js
+{
+  "id": 0,
+  "username": "Bob",
+  "integrations": {
+    "google": {
+      "id": "123", // user id on Google+
+      "display_name": "Bob" // display name on Google+
+    },
+    "discord": {
+      "id": "123", // user id on Discord
+      "display_name": "hydrabolt#0086" // display name on Discord
+    }
+  }
+}
+```
+
 ### Game
 ```js
 {
