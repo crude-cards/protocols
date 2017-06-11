@@ -100,9 +100,11 @@ To rate-limit an endpoint, make sure the following headers are present:
 {
   "name": "Test Server",
   "description": "Description of Server",
-  "apiVersion": 1,
+  "api_version": 1,
   "players": 0,
-  "maxPlayers": 16
+  "max_players": 16,
+  "games": 0,
+  "max_games": 100
 }
 ```
 
