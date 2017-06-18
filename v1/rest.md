@@ -57,14 +57,13 @@ To rate-limit an endpoint, make sure the following headers are present:
 ## Endpoints Overview
 - Meta and Authentication
   - `GET /api/meta`
-  - `POST /api/authenticate`
   - `POST /api/authenticate/discord`
   - `POST /api/authenticate/google`
-- Integrations
-  - `🔒 POST /api/integrations/discord`
-  - `🔒 DELETE /api/integrations/discord`
-  - `🔒 POST /api/integrations/google`
-  - `🔒 DELETE /api/integrations/google`
+- Managing Authentications
+  - `🔒 POST /api/authentications/discord`
+  - `🔒 DELETE /api/authentications/discord`
+  - `🔒 POST /api/authentications/google`
+  - `🔒 DELETE /api/authentications/google`
 - Users
   - `🔒 GET /api/users/:id`
   - `🔒 PATCH /api/users/:id`
@@ -147,8 +146,8 @@ To rate-limit an endpoint, make sure the following headers are present:
 ```
 
 -----
-## Integrations
-### `🔒 POST /api/integrations/discord`
+## Managing Authentications
+### `🔒 POST /api/authentications/discord`
 #### Parameters
 - `code` - string, OAuth code from Discord.
 #### Response (200)
@@ -164,7 +163,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 }
 ```
 
-### `🔒 DELETE /api/integrations/discord`
+### `🔒 DELETE /api/authentications/discord`
 #### Response (201)
 ```js
 // success
@@ -176,7 +175,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 }
 ```
 
-### `🔒 POST /api/integrations/google`
+### `🔒 POST /api/authentications/google`
 #### Parameters
 - `code` - string, OAuth code from Google.
 #### Response (200)
@@ -192,7 +191,7 @@ To rate-limit an endpoint, make sure the following headers are present:
 }
 ```
 
-### `🔒 DELETE /api/integrations/google`
+### `🔒 DELETE /api/authentications/google`
 #### Response (201)
 ```js
 // success
